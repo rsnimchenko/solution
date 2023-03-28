@@ -25,4 +25,4 @@ Cover the VendorsScreen by Integration (UI) Tests for the following cases:
   - "No result" item visible if the vendor's list is empty
   -  At least one item in the vendor's list is displayed if the vendor's list is not empty
 
-[Design Link](https://www.figma.com/file/Yx4G4KSbcZTev1lRnc69sf/Task-Middle-Android?node-id=0%3A1)
+[Design Link](https://www.figma.com/file/Yx4G4KSbcZTev1lRnc69sf/Task-Middle-Android?node-id=0%3A1)# solution

@@ -31,7 +31,8 @@ class VendorsVM @Inject constructor(
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
-                    vendors = repository.getVendors()
+                    vendors = listOf()
+//                    vendors = repository.getVendors()
                 )
             }
         }
