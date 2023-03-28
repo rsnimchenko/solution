@@ -1,6 +1,8 @@
 package com.youarelaunched.challenge.ui.screen.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,14 +15,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.middle.R
-import com.youarelaunched.challenge.ui.theme.VendorAppColors
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
 
 @Composable
 fun TopBar(
+    searchFieldText: String,
+    updateText: (String) -> Unit,
+    startSearch: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -29,18 +32,29 @@ fun TopBar(
             .background(VendorAppTheme.colors.background),
         contentAlignment = Alignment.Center
     ) {
-        SearchField()
+        SearchField(
+            searchFieldText = searchFieldText,
+            updateText = updateText,
+            startSearch = startSearch
+        )
     }
 }
 
 @Composable
-fun SearchField() {
-    var text by remember { mutableStateOf("") }
-
+fun SearchField(
+    searchFieldText: String,
+    updateText: (String) -> Unit,
+    startSearch: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextField(
-        value = text,
-        onValueChange = { text = it },
-        modifier = Modifier
+        value = searchFieldText,
+        onValueChange = {
+            updateText(it.trimStart())
+            if (it.isEmpty() || it.length >= 3)
+                startSearch()
+        },
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 24.dp, horizontal = 16.dp)
             .shadow(
@@ -70,18 +84,13 @@ fun SearchField() {
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.icon_search),
                 "search_icon",
-                tint = VendorAppTheme.colors.text
+                tint = VendorAppTheme.colors.text,
+                modifier = Modifier.clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = { startSearch() }
+                )
             )
         }
     )
-
-
-}
-
-@Preview
-@Composable
-fun TopBarPreview() {
-    VendorAppTheme {
-        SearchField()
-    }
 }
