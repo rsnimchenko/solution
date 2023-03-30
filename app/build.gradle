@@ -16,6 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables {
             useSupportLibrary true
         }
@@ -54,11 +56,19 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+
 }
 
 dependencies {
 
     implementation coroutines.lib
+    implementation coroutines.test
 
     implementation lifecycle.viewModelCompose
 
@@ -70,6 +80,8 @@ dependencies {
     implementation compose.foundationLayout
     implementation compose.uiToolingPreview
     implementation compose.constraintLayout
+    androidTestImplementation compose.uiTest
+    debugImplementation compose.uiTestManifest
 
     implementation coil.img
     implementation coil.svg
@@ -80,4 +92,10 @@ dependencies {
     kapt hiltDependencies.kapt
 
     implementation retrofit.jsonConverter
+
+    testImplementation jUnit.junitJupiterApi
+    testRuntimeOnly jUnit.junitJupiterEngine
+
+    testImplementation mockito.mockitoCore
+    testImplementation mockito.mockitoKotlin
 }

@@ -10,8 +10,10 @@ buildscript {
         kotlinVersion = "1.7.10"
 
         //Coroutines RN https://github.com/Kotlin/kotlinx.coroutines
+        coroutinesVersion = "1.6.4"
         coroutines = [
-                lib: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+                lib : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+                test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
         ]
 
         //AndroidX core RN https://developer.android.com/jetpack/androidx/releases/core
@@ -47,7 +49,9 @@ buildscript {
                 //Compose tooling RN https://developer.android.com/jetpack/compose/tooling
                 uiToolingPreview: "androidx.compose.ui:ui-tooling-preview:$composeUiVersion",
                 //Constraint layout https://developer.android.com/jetpack/compose/layouts/constraintlayout
-                constraintLayout: "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+                constraintLayout: "androidx.constraintlayout:constraintlayout-compose:1.0.1",
+                uiTest          : "androidx.compose.ui:ui-test-junit4:$composeUiVersion",
+                uiTestManifest  : "androidx.compose.ui:ui-test-manifest:$composeUiVersion"
         ]
 
         //Accompanist RN https://github.com/google/accompanist/releases
@@ -68,6 +72,19 @@ buildscript {
         retrofit = [
                 lib          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
                 jsonConverter: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+        ]
+
+        jUnitVersion = "5.8.2"
+        jUnit = [
+                junitJupiterApi   : "org.junit.jupiter:junit-jupiter-api:$jUnitVersion",
+                junitJupiterEngine: "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
+        ]
+
+        mockitoVersion = "4.2.0"
+        mockitoKotlinVersion = "4.0.0"
+        mockito = [
+                mockitoCore  : "org.mockito:mockito-core:$mockitoVersion",
+                mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
         ]
     }
 

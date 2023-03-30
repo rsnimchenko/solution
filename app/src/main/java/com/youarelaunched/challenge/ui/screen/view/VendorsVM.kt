@@ -32,7 +32,7 @@ class VendorsVM @Inject constructor(
         getVendors("")
     }
 
-    private fun getVendors(companyName: String) {
+    fun getVendors(companyName: String) {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
@@ -57,5 +57,4 @@ class VendorsVM @Inject constructor(
             getVendors(_uiState.value.searchFieldText.trimEnd())
         }
     }
-
 }
